@@ -21,7 +21,7 @@ elseif (isset($_GET['auth'])) {
   if (isset($_POST['login'], $_POST['password'])
     && is_int($id = array_search($_POST['login'],
       array_column(users, LOGIN)))
-    && (md5($_POST['password']) == users[$id][HASH])) {
+    && ( password_verify($_POST['password'], users[$id][HASH]) ) ) {
 
     $_SESSION[SALT] = users[$id][SALT];
     $_SESSION[LOGIN] = users[$id][LOGIN];
